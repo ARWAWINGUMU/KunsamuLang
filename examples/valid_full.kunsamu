@@ -1,0 +1,38 @@
+COMUNIDAD "Seynimin" {
+
+    TERRITORIO "Sierra Nevada" {
+        MENSAJE: "Territorio sagrado de equilibrio y memoria"
+
+        ELEMENTO "Agua" {
+            MENSAJE: "El agua representa la vida"
+            CATEGORIA: espiritual
+        }
+
+        ELEMENTO "Montaña" {
+            MENSAJE: "La montaña protege el equilibrio"
+            CATEGORIA: territorio
+        }
+    }
+
+    PROYECTO "Escuela de Saberes" {
+        PARTICIPANTE "Mamo Arhuaco" {
+            ROL: guía
+        }
+
+        CURSO "Saberes de Origen" {
+            DURACION: 5 meses
+            ENFOQUE: intercultural
+            TEMAS: ["memoria", "territorio", "palabra"]
+        }
+
+        CURSO "Lecturaleza" {
+            DURACION: 1 mes
+            ENFOQUE: ambiental
+            TEMAS: ["agua", "montaña", "cuidado"]
+        }
+
+        ACTIVIDAD "Círculo de palabra" {
+            FRECUENCIA: semanal
+        }
+    }
+}

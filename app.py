@@ -1,0 +1,34 @@
+from __future__ import annotations
+
+from pathlib import Path
+
+from flask import Flask, jsonify, render_template, request
+
+from pipeline import KunsamuPipeline
+
+
+BASE_DIR = Path(__file__).resolve().parent
+
+app = Flask(
+    __name__,
+    template_folder=str(BASE_DIR / "web" / "templates"),
+    static_folder=str(BASE_DIR / "web" / "static"),
+)
+
+
+@app.get("/")
+def index():
+    example = (BASE_DIR / "examples" / "valid_full.kunsamu").read_text(encoding="utf-8")
+    return render_template("index.html", example=example)
+
+
+@app.post("/api/analyze")
+def analyze():
+    payload = request.get_json(silent=True) or {}
+    source = payload.get("source", "")
+    result = KunsamuPipeline().analyze(source)
+    return jsonify(result)
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="127.0.0.1", port=5000)

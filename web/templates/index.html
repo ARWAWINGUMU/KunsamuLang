@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KunsamuLang | Analizador DSL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">DSL · ANTLR4 · Python · Flask</p>
+          <h1>KunsamuLang</h1>
+          <p class="subtitle">Lenguaje de Dominio Específico para la Representación y Transformación de Saberes Ancestrales Arhuacos</p>
+        </div>
+        <div class="top-actions">
+          <button id="loadValid" class="ghost-button" type="button">Ejemplo válido</button>
+          <button id="loadInvalid" class="ghost-button" type="button">Ejemplo inválido</button>
+          <button id="analyzeBtn" class="primary-button" type="button">Analizar</button>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="editor-panel">
+          <div class="panel-title">
+            <span>Editor KunsamuLang</span>
+            <small id="sourceStats">0 líneas</small>
+          </div>
+          <div class="code-shell">
+            <pre id="lineNumbers">1</pre>
+            <div class="editor-stack">
+              <pre id="highlightLayer" aria-hidden="true"></pre>
+              <textarea id="sourceEditor" spellcheck="false">{{ example }}</textarea>
+            </div>
+          </div>
+        </aside>
+
+        <section class="results-panel">
+          <div id="metricGrid" class="metric-grid"></div>
+
+          <nav class="tabs" aria-label="Paneles de análisis">
+            <button class="tab active" data-target="tokens">Tokens</button>
+            <button class="tab" data-target="diagnostics">Errores</button>
+            <button class="tab" data-target="ast">AST</button>
+            <button class="tab" data-target="parse">Parse Tree</button>
+            <button class="tab" data-target="json">JSON</button>
+            <button class="tab" data-target="xml">XML</button>
+            <button class="tab" data-target="graph">Grafo</button>
+          </nav>
+
+          <div class="tab-content active" id="tokens"><div class="table-wrap"><table id="tokensTable"></table></div></div>
+          <div class="tab-content" id="diagnostics"><div id="diagnosticsList" class="diagnostic-list"></div></div>
+          <div class="tab-content" id="ast"><div id="astTree" class="tree-view"></div></div>
+          <div class="tab-content" id="parse"><div id="parseTree" class="tree-view"></div></div>
+          <div class="tab-content" id="json"><pre id="jsonOutput" class="code-output"></pre></div>
+          <div class="tab-content" id="xml"><pre id="xmlOutput" class="code-output"></pre></div>
+          <div class="tab-content" id="graph"><svg id="graphCanvas" viewBox="0 0 960 560" role="img" aria-label="Visualización gráfica del AST"></svg></div>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      window.KUNSAMU_VALID_EXAMPLE = {{ example|tojson }};
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

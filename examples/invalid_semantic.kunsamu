@@ -1,0 +1,16 @@
+COMUNIDAD "Seynimin" {
+    TERRITORIO "Sierra Nevada" {
+        ELEMENTO "Agua" {
+            MENSAJE: "El agua representa la vida"
+        }
+
+        ELEMENTO "Agua" {
+        }
+    }
+
+    PROYECTO "Escuela de Saberes" {
+        CURSO "Saberes de Origen" {
+            DURACION: 0 siglos
+        }
+    }
+}
