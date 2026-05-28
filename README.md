@@ -2,7 +2,7 @@
 
 **Lenguaje de Dominio Específico para la Representación y Transformación de Saberes Ancestrales Arhuacos**
 
-KunsamuLang es una plataforma académica de procesamiento de lenguajes construida con Python, ANTLR4 y Flask. Permite escribir código en un DSL propio, analizar tokens, validar sintaxis y semántica, construir AST, exportar a JSON/XML y visualizar la estructura del conocimiento como grafo interactivo.
+KunsamuLang es una plataforma académica de procesamiento de lenguajes construida con Python, ANTLR4 y Flask. Permite escribir código fuente en un DSL propio, analizar tokens, validar sintaxis y semántica, construir AST, exportar a JSON/XML, visualizar la estructura del conocimiento como grafo interactivo y manipular automáticamente el código mediante formateo, auto-corrección y renombrado de símbolos.
 
 ## Arquitectura
 
@@ -12,8 +12,10 @@ KunsamuLang/
 ├── generated/                   # Lexer, Parser y Visitor generados
 ├── ast/nodes.py                 # Nodos del AST simplificado
 ├── visitors/ast_builder.py      # Visitor-style AST builder
+├── visitors/antlr_ast_visitor.py # Punto de integración con Visitor generado por ANTLR
 ├── semantic/analyzer.py         # Reglas semánticas
 ├── exporters/                   # JSON, XML y grafo
+├── manipulators.py              # Formateo, auto-fix y renombrado
 ├── web/templates/index.html     # Demo Flask
 ├── web/static/css/styles.css
 ├── web/static/js/app.js
@@ -60,6 +62,18 @@ La interfaz incluye:
 - XML formateado,
 - grafo interactivo con D3.js,
 - métricas de comunidades, territorios, proyectos, cursos, elementos y profundidad.
+- manipulación automática del código fuente: formateo, auto-corrección y renombrado.
+
+## Manipulación automática de código fuente
+
+Para alinearse con la rúbrica de análisis y manipulación automática de código fuente, KunsamuLang incluye operaciones sobre el texto fuente del DSL:
+
+- **Formateo automático:** reescribe el programa con indentación consistente y estructura normalizada.
+- **Auto-corrección semántica básica:** agrega `MENSAJE` faltante en elementos, corrige `DURACION` inválida y añade `ENFOQUE` cuando falta.
+- **Renombrado de símbolos:** reemplaza nombres de bloques específicos como `CURSO`, `ELEMENTO`, `PROYECTO` o `TERRITORIO`.
+- **Transformación estructural:** convierte el código fuente a JSON y XML a partir del AST.
+
+Estas operaciones permiten demostrar que la herramienta no solo inspecciona el código, sino que también lo transforma automáticamente.
 
 ## Ejemplo DSL
 
@@ -124,3 +138,5 @@ pytest
 El informe con introducción, justificación, motivación, objetivos, marco teórico, arquitectura, implementación, pruebas, resultados, conclusiones, trabajos futuros y referencias IEEE está en `docs/INFORME_ACADEMICO.md`.
 
 La guía de sustentación por diapositivas está en `docs/PRESENTACION_ACADEMICA.md`.
+
+La propuesta alineada con la rúbrica está en `docs/PROPUESTA_RUBRICA.md`.

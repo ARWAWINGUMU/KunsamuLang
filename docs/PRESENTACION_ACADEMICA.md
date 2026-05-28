@@ -27,7 +27,7 @@ Explicar `grammar/KunsamuLang.g4`: reglas `program`, `comunidad`, `territorio`, 
 
 ## Diapositiva 7. Pipeline
 
-Código fuente → tokens → parse tree → AST → análisis semántico → JSON/XML → grafo.
+Código fuente → tokens → parse tree → AST → análisis semántico → manipulación automática → JSON/XML → grafo.
 
 ## Diapositiva 8. AST
 
@@ -58,7 +58,16 @@ Validaciones implementadas:
 
 Mostrar JSON y XML generados automáticamente desde el AST.
 
-## Diapositiva 11. Demo web
+## Diapositiva 11. Manipulación automática
+
+Mostrar en vivo:
+
+- Formateo del código fuente.
+- Auto-corrección de un ejemplo inválido.
+- Renombrado de un curso o elemento.
+- Reanálisis posterior para comprobar el efecto de la transformación.
+
+## Diapositiva 12. Demo web
 
 Flujo de exposición:
 
@@ -67,15 +76,17 @@ Flujo de exposición:
 3. Mostrar tokens, AST, JSON, XML, métricas y grafo.
 4. Cargar ejemplo inválido.
 5. Explicar errores semánticos.
+6. Presionar **Auto-corregir**.
+7. Renombrar un símbolo y volver a analizar.
 
-## Diapositiva 12. Resultados
+## Diapositiva 13. Resultados
 
 KunsamuLang funciona como herramienta académica de análisis de lenguajes y como plataforma visual para representar conocimiento estructurado.
 
-## Diapositiva 13. Conclusiones
+## Diapositiva 14. Conclusiones
 
 El proyecto demuestra dominio de gramáticas, parsing, AST, visitors, análisis semántico, serialización y visualización en una arquitectura modular.
 
-## Diapositiva 14. Trabajos futuros
+## Diapositiva 15. Trabajos futuros
 
 Autocompletado, resaltado avanzado, persistencia, validaciones culturales enriquecidas e integración directa con artefactos ANTLR generados.

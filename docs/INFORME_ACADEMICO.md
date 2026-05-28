@@ -2,7 +2,7 @@
 
 ## 1. Introducción
 
-KunsamuLang es un lenguaje de dominio específico orientado a representar comunidades, territorios, elementos naturales, proyectos educativos, cursos, participantes y actividades asociadas a saberes ancestrales Arhuacos. El proyecto integra análisis léxico, análisis sintáctico, construcción de AST, validación semántica, transformación a JSON/XML y visualización gráfica.
+KunsamuLang es un lenguaje de dominio específico orientado a representar comunidades, territorios, elementos naturales, proyectos educativos, cursos, participantes y actividades asociadas a saberes ancestrales Arhuacos. El proyecto integra análisis léxico, análisis sintáctico, construcción de AST, validación semántica, manipulación automática de código fuente, transformación a JSON/XML y visualización gráfica.
 
 ## 2. Justificación
 
@@ -18,6 +18,7 @@ La asignatura de Lenguajes de Programación requiere evidenciar conceptos de com
 - Construir gramática ANTLR4 con Lexer, Parser y Visitor.
 - Implementar AST simplificado y análisis semántico.
 - Exportar la estructura a JSON y XML.
+- Manipular automáticamente el código fuente mediante formateo, auto-corrección y renombrado.
 - Visualizar el conocimiento mediante un grafo interactivo.
 - Presentar una demo web profesional.
 
@@ -41,11 +42,19 @@ El sistema se organiza por responsabilidades: `grammar/` contiene la especificac
 
 ## 7. Implementación
 
-La sintaxis usa bloques como `COMUNIDAD`, `TERRITORIO`, `ELEMENTO`, `PROYECTO` y `CURSO`. Cada bloque puede contener atributos y subbloques permitidos. El pipeline ejecuta tokenización, parsing, construcción de AST, análisis semántico y exportación.
+La sintaxis usa bloques como `COMUNIDAD`, `TERRITORIO`, `ELEMENTO`, `PROYECTO` y `CURSO`. Cada bloque puede contener atributos y subbloques permitidos. El pipeline ejecuta tokenización, parsing, construcción de AST, análisis semántico, manipulación automática de código fuente y exportación.
+
+Las operaciones de manipulación implementadas son:
+
+- formateo automático,
+- auto-corrección semántica básica,
+- renombrado de símbolos,
+- transformación a JSON,
+- transformación a XML.
 
 ## 8. Pruebas
 
-Se incluyen pruebas con `pytest` para validar un escenario correcto y un escenario con errores semánticos: nombres duplicados, duración inválida y ausencia de enfoque.
+Se incluyen pruebas con `pytest` para validar un escenario correcto, un escenario con errores semánticos y operaciones de manipulación automática sobre el código fuente.
 
 ## 9. Resultados
 

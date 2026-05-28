@@ -1,0 +1,13 @@
+{
+  "input": "examples/invalid_semantic.kunsamu",
+  "expected": {
+    "success": false,
+    "diagnostics_contains": [
+      "Nombre duplicado",
+      "debe tener MENSAJE",
+      "duración inválida",
+      "unidad de duración",
+      "no tiene atributo ENFOQUE"
+    ]
+  }
+}

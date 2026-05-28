@@ -10,5 +10,5 @@ if (!(Test-Path $Jar)) {
     Invoke-WebRequest -Uri "https://www.antlr.org/download/antlr-4.13.2-complete.jar" -OutFile $Jar
 }
 
-java -jar $Jar -Dlanguage=Python3 -visitor -o $Output $Grammar
+java -jar $Jar -Dlanguage=Python3 -visitor -Xexact-output-dir -o $Output $Grammar
 Write-Host "Lexer, Parser y Visitor generados en $Output"

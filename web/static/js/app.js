@@ -2,6 +2,9 @@ const editor = document.querySelector("#sourceEditor");
 const lineNumbers = document.querySelector("#lineNumbers");
 const highlightLayer = document.querySelector("#highlightLayer");
 const analyzeBtn = document.querySelector("#analyzeBtn");
+const formatBtn = document.querySelector("#formatBtn");
+const autoFixBtn = document.querySelector("#autoFixBtn");
+const renameBtn = document.querySelector("#renameBtn");
 const metricGrid = document.querySelector("#metricGrid");
 const invalidExample = `COMUNIDAD "Seynimin" {
   TERRITORIO "Sierra Nevada" {
@@ -58,6 +61,22 @@ async function analyze() {
     analyzeBtn.disabled = false;
     analyzeBtn.textContent = "Analizar";
   }
+}
+
+async function transform(endpoint, payload = {}) {
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ source: editor.value, ...payload }),
+  });
+  const result = await response.json();
+  if (!result.success) {
+    renderDiagnostics([{ level: "error", stage: "manipulación", message: result.message, line: "-", column: "-" }], false);
+    return;
+  }
+  editor.value = result.source;
+  updateLineNumbers();
+  analyze();
 }
 
 function render(result) {
@@ -238,6 +257,16 @@ editor.addEventListener("scroll", () => {
 document.querySelector("#loadValid").addEventListener("click", () => { editor.value = window.KUNSAMU_VALID_EXAMPLE; updateLineNumbers(); analyze(); });
 document.querySelector("#loadInvalid").addEventListener("click", () => { editor.value = invalidExample; updateLineNumbers(); analyze(); });
 analyzeBtn.addEventListener("click", analyze);
+formatBtn.addEventListener("click", () => transform("/api/format"));
+autoFixBtn.addEventListener("click", () => transform("/api/autofix"));
+renameBtn.addEventListener("click", () => {
+  const kind = prompt("Tipo de bloque", "CURSO");
+  const oldName = prompt("Nombre actual", "Saberes de Origen");
+  const newName = prompt("Nombre nuevo", "Saberes Ancestrales");
+  if (kind && oldName && newName) {
+    transform("/api/rename", { kind, oldName, newName });
+  }
+});
 
 updateLineNumbers();
 analyze();

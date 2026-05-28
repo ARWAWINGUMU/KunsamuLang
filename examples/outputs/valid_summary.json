@@ -1,0 +1,16 @@
+{
+  "input": "examples/valid_full.kunsamu",
+  "expected": {
+    "success": true,
+    "metrics": {
+      "comunidades": 1,
+      "territorios": 1,
+      "proyectos": 1,
+      "cursos": 2,
+      "elementos": 2,
+      "participantes": 1,
+      "actividades": 1
+    },
+    "diagnostics": []
+  }
+}

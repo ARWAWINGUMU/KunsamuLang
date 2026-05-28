@@ -1,0 +1,18 @@
+COMUNIDAD "Seynimin" {
+    TERRITORIO "Sierra Nevada" {
+        ELEMENTO "Agua" {
+            MENSAJE: "El agua representa la vida"
+        }
+
+        ELEMENTO "Agua 2" {
+            MENSAJE: "Mensaje pendiente para Agua 2"
+        }
+    }
+
+    PROYECTO "Escuela de Saberes" {
+        CURSO "Saberes de Origen" {
+            DURACION: 1 mes
+            ENFOQUE: intercultural
+        }
+    }
+}
