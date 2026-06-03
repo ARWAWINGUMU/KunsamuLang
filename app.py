@@ -4,8 +4,11 @@ from pathlib import Path
 
 from flask import Flask, jsonify, render_template, request
 
+from interpreter import KunsamuInterpreter
 from manipulators import SourceManipulator
+from parser_engine import KunsamuLexer, KunsamuParser
 from pipeline import KunsamuPipeline
+from visitors.ast_builder import ASTBuilder
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -66,6 +69,28 @@ def rename_symbol():
         return jsonify({"success": True, "source": renamed})
     except ValueError as exc:
         return jsonify({"success": False, "message": str(exc)}), 400
+
+
+@app.post("/api/query")
+def query_source():
+    payload = request.get_json(silent=True) or {}
+    source = payload.get("source", "")
+    query = payload.get("query", "").strip()
+
+    if not query:
+        return jsonify({"error": "Consulta vacía."}), 400
+
+    tokens, lex_errors = KunsamuLexer().tokenize(source)
+    if lex_errors:
+        return jsonify({"error": lex_errors[0]["message"]}), 400
+
+    parsed, syn_errors, _ = KunsamuParser(tokens).parse()
+    if syn_errors:
+        return jsonify({"error": syn_errors[0]["message"]}), 400
+
+    ast_root = ASTBuilder().visit_program(parsed)
+    result = KunsamuInterpreter(ast_root).execute(query)
+    return jsonify(result)
 
 
 if __name__ == "__main__":

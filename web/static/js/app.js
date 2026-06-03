@@ -268,5 +268,94 @@ renameBtn.addEventListener("click", () => {
   }
 });
 
+// ── Query interpreter UI ─────────────────────────────────────────────────
+
+async function runQuery() {
+  const input = document.querySelector("#queryInput");
+  const query = input.value.trim();
+  if (!query) return;
+
+  const btn = document.querySelector("#queryBtn");
+  btn.disabled = true;
+  btn.textContent = "Consultando...";
+  try {
+    const response = await fetch("/api/query", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ source: editor.value, query }),
+    });
+    const result = await response.json();
+    renderQueryResult(result);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Consultar";
+  }
+}
+
+function renderQueryResult(result) {
+  const container = document.querySelector("#queryResult");
+  if (result.error) {
+    container.innerHTML = `<div class="diagnostic error"><strong>Error</strong><p>${escapeHtml(result.error)}</p></div>`;
+    return;
+  }
+
+  let html = `<div class="query-summary">${escapeHtml(result.summary)}</div>`;
+
+  if (result.results && result.results.length > 0) {
+    html += `<div class="query-nodes">${result.results.map((node) => `
+      <div class="query-node">
+        <div class="query-node-header">
+          <span class="query-node-kind">${escapeHtml(node.kind)}</span>
+          ${node.name ? `<span class="query-node-name">"${escapeHtml(node.name)}"</span>` : ""}
+          <span class="query-node-loc">línea ${node.location.line}</span>
+        </div>
+        ${Object.keys(node.attributes).length
+          ? `<pre class="node-attrs">${escapeHtml(JSON.stringify(node.attributes, null, 2))}</pre>`
+          : ""}
+      </div>`).join("")}</div>`;
+  }
+
+  if (result.names && result.names.length > 0) {
+    html += `<div class="query-names">${result.names.map((n) => `<span class="name-chip">${escapeHtml(n)}</span>`).join("")}</div>`;
+  }
+
+  if (result.path) {
+    html += `<div class="query-path">${result.path.map((n, i) => `
+      <span class="path-node">${escapeHtml(n.kind)}${n.name ? ` · "${escapeHtml(n.name)}"` : ""}</span>
+      ${i < result.path.length - 1 ? '<span class="path-arrow">→</span>' : ""}`).join("")}
+    </div>`;
+  }
+
+  if (result.reporte) {
+    html += `<table>
+      <thead><tr>
+        <th>Comunidad</th><th>Territorios</th><th>Proyectos</th>
+        <th>Cursos</th><th>Participantes</th><th>Actividades</th><th>Elementos</th>
+      </tr></thead>
+      <tbody>${result.reporte.map((row) => `
+        <tr>
+          <td><strong>${escapeHtml(row.comunidad)}</strong></td>
+          <td>${row.territorios}</td><td>${row.proyectos}</td>
+          <td>${row.cursos}</td><td>${row.participantes}</td>
+          <td>${row.actividades}</td><td>${row.elementos}</td>
+        </tr>`).join("")}
+      </tbody>
+    </table>`;
+  }
+
+  container.innerHTML = html;
+}
+
+document.querySelector("#queryBtn").addEventListener("click", runQuery);
+document.querySelector("#queryInput").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") runQuery();
+});
+document.querySelectorAll(".query-chip").forEach((chip) => {
+  chip.addEventListener("click", () => {
+    document.querySelector("#queryInput").value = chip.textContent.trim();
+    runQuery();
+  });
+});
+
 updateLineNumbers();
 analyze();

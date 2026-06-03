@@ -51,6 +51,7 @@
             <button class="tab" data-target="json">JSON</button>
             <button class="tab" data-target="xml">XML</button>
             <button class="tab" data-target="graph">Grafo</button>
+            <button class="tab" data-target="query">Consultar</button>
           </nav>
 
           <div class="tab-content active" id="tokens"><div class="table-wrap"><table id="tokensTable"></table></div></div>
@@ -60,6 +61,24 @@
           <div class="tab-content" id="json"><pre id="jsonOutput" class="code-output"></pre></div>
           <div class="tab-content" id="xml"><pre id="xmlOutput" class="code-output"></pre></div>
           <div class="tab-content" id="graph"><svg id="graphCanvas" viewBox="0 0 960 560" role="img" aria-label="Visualización gráfica del AST"></svg></div>
+
+          <div class="tab-content" id="query">
+            <div class="query-panel">
+              <div class="query-examples">
+                <span class="query-label">Ejemplos:</span>
+                <button class="query-chip" type="button">LISTAR COMUNIDAD</button>
+                <button class="query-chip" type="button">BUSCAR CURSO DONDE ENFOQUE = ambiental</button>
+                <button class="query-chip" type="button">CONTAR PARTICIPANTE</button>
+                <button class="query-chip" type="button">RUTA CURSO "Saberes de Origen"</button>
+                <button class="query-chip" type="button">REPORTE</button>
+              </div>
+              <div class="query-input-row">
+                <input type="text" id="queryInput" placeholder='BUSCAR CURSO DONDE ENFOQUE = ambiental' spellcheck="false" />
+                <button id="queryBtn" class="primary-button" type="button">Consultar</button>
+              </div>
+              <div id="queryResult"></div>
+            </div>
+          </div>
         </section>
       </section>
     </main>
