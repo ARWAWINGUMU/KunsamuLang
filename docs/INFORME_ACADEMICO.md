@@ -2,11 +2,14 @@
 
 ## 1. Introducción
 
-KunsamuLang es un lenguaje de dominio específico orientado a representar comunidades, territorios, elementos naturales, proyectos educativos, cursos, participantes y actividades asociadas a saberes ancestrales Arhuacos. El proyecto integra análisis léxico, análisis sintáctico, construcción de AST, validación semántica, manipulación automática de código fuente, transformación a JSON/XML y visualización gráfica.
+KunsamuLang es un lenguaje de dominio específico orientado a representar comunidades, territorios, elementos naturales, proyectos educativos, cursos, participantes y actividades asociadas a saberes ancestrales Arhuacos. El proyecto integra análisis léxico, análisis sintáctico, construcción de AST, validación semántica, transformación a JSON/XML y visualización gráfica.
 
 ## 2. Justificación
 
-Los DSL permiten modelar problemas con vocabularios cercanos al dominio. En este caso, el lenguaje usa una sintaxis declarativa para expresar estructuras culturales y educativas de forma verificable, transformable y visualizable.
+La pertinencia de este trabajo radica en la necesidad de emplear mecanismos tecnológicos que permitan la preservación de la memoria colectiva de la comunidad arahuaca. Históricamente, el conocimiento ancestral Arhuaco, regido por la Ley de Origen, se ha transmitido de forma oral, lo que presenta retos de persistencia frente a la globalización y la digitalización externa.
+
+Los DSL permiten modelar problemas con vocabularios cercanos al dominio. Para este caso, el lenguaje usa una sintaxis declarativa para expresar estructuras culturales y educativas de forma verificable, transformable y visualizable y pedagógico.
+
 
 ## 3. Motivación
 

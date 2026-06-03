@@ -132,11 +132,3 @@ PROGRAMA
 ```bash
 pytest
 ```
-
-## Entregables académicos
-
-El informe con introducción, justificación, motivación, objetivos, marco teórico, arquitectura, implementación, pruebas, resultados, conclusiones, trabajos futuros y referencias IEEE está en `docs/INFORME_ACADEMICO.md`.
-
-La guía de sustentación por diapositivas está en `docs/PRESENTACION_ACADEMICA.md`.
-
-La propuesta alineada con la rúbrica está en `docs/PROPUESTA_RUBRICA.md`.
