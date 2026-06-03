@@ -1,3 +1,10 @@
+## 👨‍💻 Integrantes del equipo
+ 
+- Yeiner Arwawingumu Zapata Vallejo
+- Juan Ruiz Guasca
+- Sergio Motta
+
+
 # KunsamuLang
 
 **Lenguaje de Dominio Específico para la Representación y Transformación de Saberes Ancestrales Arhuacos**
