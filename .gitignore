@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+env/
+instance/
+.env
+*.log
+antlr-4.13.2-complete.jar

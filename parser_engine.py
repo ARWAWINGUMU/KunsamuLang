@@ -140,6 +140,7 @@ class KunsamuLexer:
 class KunsamuParser:
     BLOCKS = {"COMUNIDAD", "TERRITORIO", "ELEMENTO", "PROYECTO", "CURSO", "PARTICIPANTE", "ACTIVIDAD"}
     ATTRIBUTE_KEYWORDS = {"MENSAJE", "DURACION", "ENFOQUE"}
+    VALUE_KEYWORDS = BLOCKS | ATTRIBUTE_KEYWORDS
 
     def __init__(self, tokens: list[Token]) -> None:
         self.tokens = tokens
@@ -215,6 +216,8 @@ class KunsamuParser:
             return value
         if self._match("ID"):
             return self._previous().text
+        if self._check(*self.VALUE_KEYWORDS):
+            return self._advance().text.lower()
         if self._match("LBRACK"):
             values = []
             if not self._check("RBRACK"):
